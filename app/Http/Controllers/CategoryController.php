@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories=Category::included()->get();
         return response()->json($categories);
     }
 
@@ -44,4 +44,26 @@ class CategoryController extends Controller
         // $category = Category::with(['posts'])->findOrFail($id);
         return response()->json($category);
     }
+
+     public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'slug' => 'required|max:255|unique:categories,slug,'.$category->id,
+
+        ]);
+
+        $category->update($request->all());
+
+        return $category;
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return $category;
+    }
+
+
+
 }

@@ -9,8 +9,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-// Route::get('categories', [CategoryController::class,'index'])->name('api.v1.categories.index');
-// Route::post('categories', [CategoryController::class,'store'])->name('api.v1.categories.store');
-// Route::get('categories/{category}', [CategoryController::class,'show'])->name('api.v1.categories.show');
+ Route::get('categories', [CategoryController::class,'index'])->name('api.v1.categories.index');
+ Route::post('categories', [CategoryController::class,'store'])->name('api.v1.categories.store');
+ Route::get('categories/{category}', [CategoryController::class,'show'])->name('api.v1.categories.show');
 
-Route::resource('categories',CategoryController::class);
+// Route::resource('categories',CategoryController::class);
