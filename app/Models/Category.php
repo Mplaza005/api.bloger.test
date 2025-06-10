@@ -19,23 +19,26 @@ class Category extends Model
 
     public function scopeIncluded(Builder $query)
     {
-        if (empty($this->allowIncluded) || empty(request('included'))) { // validamos que la lista blanca y la variable included enviada a travez de HTTP no este en vacia.
-            return;
-        }
+        // if (empty($this->allowIncluded) || empty(request('included'))) { // validamos que la lista blanca y la variable included enviada a travez de HTTP no este en vacia.
+        //     return;
+        // }
+        // return "hola";
 
+         $relations = explode(',', request('included')); //['posts','relation2']//recuperamos el valor de la variable included y separa sus valores por una coma
 
-        $relations = explode(',', request('included')); //['posts','relation2']//recuperamos el valor de la variable included y separa sus valores por una coma
+        
+
 
         //return $relations;
 
-        $allowIncluded = collect($this->allowIncluded); //colocamos en una colecion lo que tiene $allowIncluded en este caso = ['posts','posts.user']
+        // $allowIncluded = collect($this->allowIncluded); //colocamos en una colecion lo que tiene $allowIncluded en este caso = ['posts','posts.user']
 
-        foreach ($relations as $key => $relationship) { //recorremos el array de relaciones
+        // foreach ($relations as $key => $relationship) { //recorremos el array de relaciones
 
-            if (!$allowIncluded->contains($relationship)) {
-                unset($relations[$key]);
-            }
-        }
+        //     if (!$allowIncluded->contains($relationship)) {
+        //         unset($relations[$key]);
+        //     }
+        // }
 
         // return $relations;
 

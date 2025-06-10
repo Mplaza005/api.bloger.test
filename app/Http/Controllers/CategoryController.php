@@ -9,9 +9,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-       $category = Category::included()->findOrFail(2);
-        // $categories=Category::included()->get();
-        return response()->json($category);
+      // $category = Category::included()->findOrFail(2);
+        $categories=Category::included()->get();
+        return response()->json($categories);
     }
 
     /**
