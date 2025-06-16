@@ -11,6 +11,7 @@ class CategoryController extends Controller
     {
       // $category = Category::included()->findOrFail(2);
         $categories=Category::included()->get();
+         // $categories=Category::included()->filter()->get();
         return response()->json($categories);
     }
 
