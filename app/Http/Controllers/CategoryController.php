@@ -9,9 +9,15 @@ class CategoryController extends Controller
 {
     public function index()
     {
-      // $category = Category::included()->findOrFail(2);
-        $categories=Category::included()->get();
-         // $categories=Category::included()->filter()->get();
+        // $category = Category::included()->findOrFail(2);
+        // $categories=Category::included()->get();
+      //  $categories=Category::included()->filter()->sort()->get();
+        $categories=Category::included()->filter()->sort()->getOrPaginate();
+        //$categories=Category::included()->filter()->get();
+
+        //$categories = Category::all();
+        //$categories = Category::with(['posts.user'])->get();
+
         return response()->json($categories);
     }
 
@@ -47,11 +53,11 @@ class CategoryController extends Controller
         return response()->json($category);
     }
 
-     public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category)
     {
         $request->validate([
             'name' => 'required|max:255',
-            'slug' => 'required|max:255|unique:categories,slug,'.$category->id,
+            'slug' => 'required|max:255|unique:categories,slug,' . $category->id,
 
         ]);
 
@@ -65,7 +71,4 @@ class CategoryController extends Controller
         $category->delete();
         return $category;
     }
-
-
-
 }
