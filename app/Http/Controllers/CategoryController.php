@@ -9,17 +9,17 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        // $category = Category::included()->findOrFail(2);
-        // $categories=Category::included()->get();
-      //  $categories=Category::included()->filter()->sort()->get();
-        $categories=Category::included()->filter()->sort()->getOrPaginate();
-        //$categories=Category::included()->filter()->get();
+       $categories = Category::all();
 
-        //$categories = Category::all();
-        //$categories = Category::with(['posts.user'])->get();
-
-        return response()->json($categories);
+       return response()->json($categories);
     }
+
+        // $categories = Category::with(['posts.user'])->get();
+        // $category = Category::included()->findOrFail(2);
+        // $categories = Category::included()->get();
+        //$categories=Category::included()->filter()->sort()->get();
+        //$categories = Category::included()->filter()->sort()->getOrPaginate();
+        // $categories=Category::included()->filter()->get();
 
     /**
      * Store a newly created resource in storage.
@@ -29,12 +29,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|max:255',
         ]);
-
         $category = Category::create($request->all());
+
 
         return response()->json($category);
     }
@@ -57,9 +56,7 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'slug' => 'required|max:255|unique:categories,slug,' . $category->id,
-
-        ]);
+            ]);
 
         $category->update($request->all());
 
