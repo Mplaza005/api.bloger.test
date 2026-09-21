@@ -7,6 +7,15 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
+    public function consulta1(){
+
+
+     $respuesta = Category::with(['posts.user'])->get();
+     return response()->json($respuesta);
+
+    }
+
     public function index()
     {
        $categories = Category::all();
