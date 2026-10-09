@@ -10,8 +10,15 @@ class CategoryController extends Controller
 
     public function consulta1(){
 
-
      $respuesta = Category::with(['posts.user'])->get();
+     return response()->json($respuesta);
+
+    }
+
+    public function consulta2(){
+
+
+     $respuesta = Category::with(['posts'])->get();
      return response()->json($respuesta);
 
     }
@@ -41,6 +48,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|max:255',
         ]);
+
         $category = Category::create($request->all());
 
 
@@ -69,12 +77,12 @@ class CategoryController extends Controller
 
         $category->update($request->all());
 
-        return $category;
+        return response()->json($category);
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
-        return $category;
+        return response()->json($category);
     }
 }
