@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Builder;
 class Category extends Model
 {
 
-    protected $fillable = ['name']; //Campos que se van a asignacion masiva:
+    protected $fillable = [
+        'name',
+        'imagen_url',
+        'imagen_public_id',
+    ]; //Campos que se van a asignacion masiva:
 
     //LISTAS BLANCAS
     protected $allowIncluded = ['posts', 'posts.user']; //las posibles Querys que se pueden realizar
